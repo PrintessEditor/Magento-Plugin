@@ -1,0 +1,3 @@
+.action.tocart.primary[type='submit']:not(.productpage) {
+    display: none;
+}

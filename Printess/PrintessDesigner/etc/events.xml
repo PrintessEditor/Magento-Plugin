@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="printess_printessdesigner_quote_to_order" instance="Printess\PrintessDesigner\Observer\AddAdditionalOptionToOrder" />
+    </event>
+    <event name="checkout_cart_product_add_after">
+        <observer name="printess_printessdesigner_checkout_cart_product_add_after" instance="Printess\PrintessDesigner\Observer\AddAdditionalOptionsToCart" />
+    </event>
+    <event name="sales_order_save_after">
+        <observer name="printess_printessdesigner_order_place_after" instance="Printess\PrintessDesigner\Observer\OrderPlaced" />
+    </event>
+</config>

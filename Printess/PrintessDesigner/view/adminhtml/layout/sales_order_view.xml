@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="order_items">
+            <arguments>
+                <argument name="columns" xsi:type="array">
+                    <item name="thumbnail" xsi:type="string" translate="true">Thumbnail</item>
+                    <item name="printess" xsi:type="string" translate="true">Printess</item>
+                </argument>
+            </arguments>
+            <referenceBlock name="default_order_items_renderer">
+                <arguments>
+                    <argument name="columns" xsi:type="array">
+                        <item name="thumbnail" xsi:type="string" translate="true">col-thumbnail</item>
+                        <item name="printess" xsi:type="string" translate="true">col-printess</item>
+                    </argument>
+                </arguments>
+            </referenceBlock>
+            <block class="Printess\PrintessDesigner\Block\Sales\Items\Column\Thumbnail" name="column_thumbnail" template="Printess_PrintessDesigner::sales/items/column/thumbnail.phtml" group="column"/>
+            <block class="Printess\PrintessDesigner\Block\Sales\Items\Column\Printess" name="column_printess" template="Printess_PrintessDesigner::sales/items/column/printess.phtml" group="column"/>
+        </referenceBlock>
+    </body>
+</page>

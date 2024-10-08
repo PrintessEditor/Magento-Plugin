@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <remove src="css/styles-m.css"/>
+        <remove src="css/styles-l.css"/>
+        <remove src="css/styles.css"/>
+        <remove src="css/print.css"/>
+        <css src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" src_type="url" rel="stylesheet" type="text/css"/>
+        <css src="Printess_PrintessDesigner::css/bs-layout.css" rel="stylesheet" type="text/css"/>
+        <css src="Printess_PrintessDesigner::css/designer.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <referenceBlock name="global.notices" remove="true"/>
+        <referenceBlock name="header" remove="true"/>
+        <referenceBlock name="logo" remove="true"/>
+        <referenceBlock name="menu" remove="true"/>
+        <referenceBlock name="legal" remove="true"/>
+        <referenceContainer name="content">
+            <block class="Printess\PrintessDesigner\Block\Designer" name="designer" template="Printess_PrintessDesigner::designer/page/view/designer.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

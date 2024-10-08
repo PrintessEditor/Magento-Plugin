@@ -1,0 +1,11 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<body>
+     <referenceBlock name="sales.email.order.renderers">
+        <!-- <block class="Magento\Sales\Block\Order\Email\Items\Order\DefaultOrder" template="Printess_PrintessDesigner::email/items/order/default.phtml"/> -->
+        <block class="Magento\Sales\Block\Order\Email\Items\Order\DefaultOrder" as="simple" template="Printess_PrintessDesigner::email/items/order/default.phtml" />
+        <block class="Magento\Sales\Block\Order\Email\Items\Order\DefaultOrder" as="downloadable" template="Printess_PrintessDesigner::email/items/order/default.phtml" />
+        <block class="Magento\Sales\Block\Order\Email\Items\Order\DefaultOrder" as="virtual" template="Printess_PrintessDesigner::email/items/order/default.phtml" />
+        <block class="Magento\Sales\Block\Order\Email\Items\Order\DefaultOrder" as="configurable" template="Printess_PrintessDesigner::email/items/order/default.phtml" />
+    </referenceBlock>
+</body>
+</page>

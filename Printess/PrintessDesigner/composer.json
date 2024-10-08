@@ -1,0 +1,23 @@
+{
+    "name": "printess/magento-2-printess-designer",
+    "description": "A module that integrates the printess designer in Magento",
+    "keywords": [
+        "printess",
+        "print",
+        "automation",
+        "mass customization",
+        "editor"
+    ],
+    "type": "magento2-module",
+    "license": "BSD-2-Clause",
+    "require": {
+        "php": "~7.4.0||~8.3.0",
+        "twig/twig": "^2.0"
+    },
+    "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "Printess\\PrintessDesigner\\": ""
+        }
+    }
+}

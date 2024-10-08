@@ -1,0 +1,65 @@
+<?php
+$uid = str_replace('-', '', $block->CreateGuidV4());
+/** @var $block Magento\Checkout\Block\Cart\Item\Renderer\Actions\PrintessEdit */
+?>
+
+<?php if ($block->isProductVisibleInSiteVisibility() && $block->isPrintessProduct()) :?>
+    <script>
+        function editItem<?= $uid ?>() {
+            const item = <?= json_encode($block->getPrintessInfo()) ?>;
+            const quantityInput = document.querySelector("input[name='cart\\[" + item.id + "\\]\\[qty\\]']");
+            const quantity = quantityInput ? parseInt(quantityInput.value) : 1;//<?php echo json_encode($block->getQty()) ?>
+
+            const basketItem = {
+                "product_sku": item.sku,
+                "product_id": item.variants && item.variants.length > 0 ? item.variants[0].product_id : item.id,
+                "options": item.itemOptions,
+                "item_id": item.id,
+                "qty": quantity
+            };
+
+            PrintessMagentoIntegration.createFromBasketItem(basketItem).then((result) => {
+                result.editor.show({
+                    templateName: item.save_token,
+                    legalText: result.legalText
+                });
+            });
+        }
+
+        function hideActionElement<?= $uid ?>() {
+            let reExecute = true;
+            const actionElement = document.getElementById("action<?= $uid ?>");
+
+            if(actionElement) {
+                if(actionElement && actionElement.parentElement) {
+                    const link = actionElement.parentElement.querySelector("a.action.action-edit");
+
+                    if(link) {
+                        link.style.display = "none";
+                        reExecute = false;
+                    }
+                }
+            }
+
+            if(reExecute) {
+                setTimeout(() => {
+                    hideActionElement<?= $uid ?>();
+                }, 1000);
+            }
+        }
+
+        setTimeout(() => { hideActionElement<?= $uid ?>(); }, 100);
+    </script>
+
+    <span class="action action-edit" onclick="editItem<?= $uid ?>()" id="action<?= $uid ?>">
+
+    </span>
+<!-- <script type="text/x-magento-init">
+    {
+        "*": {
+            //"Printess_PrintessDesigner/js/printessEditor": {},
+            //"Printess_PrintessDesigner/js/printessMagento": {}
+        }
+    }
+</script> -->
+<?php endif ?>

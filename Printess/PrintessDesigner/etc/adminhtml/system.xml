@@ -1,0 +1,67 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="printess" translate="label" sortOrder="1000">
+            <label>Printess</label>
+        </tab>
+        <section id="designer" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Designer</label>
+            <tab>printess</tab>
+            <resource>Printess_PrintessDesigner::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Printess</label>
+                <comment><![CDATA[Enable all Printess Designer Magento extension features at this Magento scope.]]></comment>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="api_token" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>API Token</label>
+                <comment><![CDATA[You will find your Shop- and Service-Token in your <a href="https://editor.printess.com/" target="_blank">printess account</a> in the account menu to the right of the top menu bar.]]></comment>
+                <field id="shop_token" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shop-Token</label>
+                    <comment><![CDATA[The shop token allows loading of templates and snippets, upload images and saving / loading the current layout.]]></comment>
+                </field>
+                <field id="service_token" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Service-Token</label>
+                    <comment><![CDATA[The service token has access to the production api and can render PDFs or PNGs.]]></comment>
+                </field>
+                <field id="show_animation" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show startup animation</label>
+                    <comment><![CDATA[The start screen of the editor should show an animation]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="startup_logo_url" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>The logo that should be displayed during editor loading (Printess Premium account only)</label>
+                    <comment><![CDATA[Url to the startup logo that should be displayed on startup]]></comment>
+                </field>
+            </group>
+            <group id="output" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Output</label>
+                <comment><![CDATA[Configure print file settings.]]></comment>
+                <field id="format" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Format</label>
+                    <source_model>Printess\PrintessDesigner\Model\Config\Source\OutputFormat</source_model>
+                    <comment><![CDATA[Global fallback. Each product can have individual output file format settings.]]></comment>
+                </field>
+                <field id="dpi" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>DPI</label>
+                    <source_model>Printess\PrintessDesigner\Model\Config\Source\Dpi</source_model>
+                    <comment><![CDATA[Global fallback. Each product can have individual print resolution settings.]]></comment>
+                </field>
+                <field id="optimize_images" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Optimize Images</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Global setting. Enable images optimization during the rendering of print files.]]></comment>
+                </field>
+            </group>
+            <group id="frontend_settings" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Frontend settings</label>
+                <field id="legal_price_notice" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Legal price notice</label>
+                    <comment><![CDATA[Global fallback. Each product can have individual notices. Markdonw allowed.]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,64 @@
+<?php
+/**
+ * Product view template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View
+ */
+?>
+<?php $_helper = $this->helper(Magento\Catalog\Helper\Output::class); ?>
+<?php $_printess = $this->helper(Printess\PrintessDesigner\Helper\Printess::class); ?>
+<?php $_product = $block->getProduct(); ?>
+<?php $_sku = $_product->getSku(); ?>
+<?php $editorSettings = $_printess->getEditorSettings(); ?>
+<?php $isStandardProduct = !$_printess->hasTemplate($_sku) || $editorSettings["embedEditor"] === "true" ||  $editorSettings["embedEditor"] === true; ?>
+
+<div class="product-add-form">
+    <form data-product-sku="<?= $block->escapeHtml($_product->getSku()) ?>"
+          action="<?= $block->escapeUrl($block->getSubmitUrl($_product)) ?>" method="<?php if ($_printess->hasTemplate($_sku) && ($editorSettings["embedEditor"] !== "true" &&  $editorSettings["embedEditor"] !== true)) :?>get<?php else :?>post<?php endif; ?>"
+          id="product_addtocart_form"
+        <?php if ($_product->getOptions() && $isStandardProduct) :?> enctype="multipart/form-data"<?php endif; ?>>
+        <?php if ($isStandardProduct) :?>
+            <input type="hidden" name="product" value="<?= (int)$_product->getId() ?>" />
+            <input type="hidden" name="sku" value="<?= $_product->getSku() ?>" />
+            <input type="hidden" name="selected_configurable_option" value="" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+            <input type="hidden" name="item"  value="<?= (int)$block->getRequest()->getParam('id') ?>" />
+            <?= $block->getBlockHtml('formkey') ?>
+            <?= $block->getChildHtml('form_top') ?>
+        <?php else: ?>
+            <input type="hidden" name="sku" value="<?= $_product->getSku() ?>" />
+            <?php foreach ($_printess->getStartDesign($_sku) as $_key => $_val): ?>
+                <input type="hidden" name="startDesign[<?= $_key ?>]" value="<?= $_val ?>" />
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <?php if (!$block->hasOptions()) :?>
+            <?= $block->getChildHtml('product_info_form_content') ?>
+        <?php else :?>
+            <?php if ($_product->isSaleable() && $block->getOptionsContainer() == 'container1') :?>
+                <?= $block->getChildChildHtml('options_container') ?>
+            <?php endif;?>
+        <?php endif; ?>
+        <?php if ($_product->isSaleable() && $block->hasOptions() && $block->getOptionsContainer() == 'container2') :?>
+            <?= $block->getChildChildHtml('options_container') ?>
+        <?php endif;?>
+        <?php if ($isStandardProduct) :?>
+            <?= $block->getChildHtml('form_bottom') ?>
+        <?php endif;?>
+
+        <?php if($_printess->hasTemplate($_sku) && ($editorSettings["embedEditor"] === "true" ||  $editorSettings["embedEditor"] === true)) :?>
+            <input type="hidden" name="saveToken" id="printess-savetoken-field" value="" />
+            <input type="hidden" name="thumbnailUrl" id="printess-thumbnail_url-field" value="" />
+            <input type="hidden" name="printessItemOptions" id="printess-item_options-field" value="" />
+        <?php endif; ?>
+    </form>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "[data-role=priceBox][data-price-box=product-id-<?= $block->escapeHtml($_product->getId()) ?>]": {
+            "priceBox": {
+                "priceConfig":  <?= /* @noEscape */ $block->getJsonConfig() ?>
+            }
+        }
+    }
+</script>

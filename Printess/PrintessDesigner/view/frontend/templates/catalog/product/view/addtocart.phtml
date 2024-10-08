@@ -1,0 +1,98 @@
+<?php
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php
+    $_printess = $this->helper(Printess\PrintessDesigner\Helper\Printess::class);
+    $_product = $block->getProduct();
+    $_sku = $_product->getSku();
+    $editorSettings = $_printess->getEditorSettings();
+    $isStandardProduct = !$_printess->hasTemplate($_sku) || $editorSettings["embedEditor"] === "true" ||  $editorSettings["embedEditor"] === true;
+    $productVariations = $_printess->getVariations($_product->getId(), $_sku, true);
+    $priceFormat = $_printess->getPriceFormat();
+?>
+
+<?php $buttonTitle = $_printess->hasTemplate($_sku) ? __('Design Now') : __('Add to Cart'); ?>
+
+<?php if ($_product->isSaleable()) :?>
+<div class="box-tocart">
+    <div class="fieldset">
+        <?php if ($block->shouldRenderQuantity()) :?>
+        <div class="field qty">
+            <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
+            <div class="control">
+                <input type="number"
+                       name="qty"
+                       id="qty"
+                       min="0"
+                       value="<?= $block->getProductDefaultQty() * 1 ?>"
+                       title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
+                       class="input-text qty"
+                       data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                       />
+            </div>
+        </div>
+        <?php endif; ?>
+        <div class="actions">
+            <button type='submit' 
+                    title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
+                    class="action primary tocart productpage"
+                    <?php if($_printess->hasTemplate($_sku)  && ($editorSettings["embedEditor"] === "true" ||  $editorSettings["embedEditor"] === true))  :?> style="display:none" <?php endif; ?>
+                    id="product-addtocart-button" >
+                <span><?= $block->escapeHtml($buttonTitle) ?></span>
+            </button>
+            <?php if($_printess->hasTemplate($_sku)  && ($editorSettings["embedEditor"] === "true" ||  $editorSettings["embedEditor"] === true)) :?><span class="action primary tocart"  onclick="openProductInPrintessEditor(event)" ><?= $block->escapeHtmlAttr($buttonTitle) ?></span><?php endif; ?>
+
+            <?= $block->getChildHtml('', true) ?>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/product/view/validation": {
+                "bindSubmit": true
+            },
+            "Magento_Catalog/js/validate-product": {}
+        },
+        "*": {
+
+        }
+    }
+</script>
+<script>
+    function openProductInPrintessEditor(evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+
+        const template = <?= $_printess->hasTemplate($_sku) ? json_encode($_product->getData('printess_template')) :  json_encode("") ?>;
+        const hidePriceInEditor = <?= $_printess->hasTemplate($_sku) ? json_encode($_product->getData('printess_hide_prices_in_editor') == 1) :  json_encode("false") ?>;
+        const legalText = <?= json_encode($_product->getData('printess_legal_text')) ?> || <?= json_encode($editorSettings["legalText"]) ?> || "";
+        const product = {
+            "name": <?= json_encode($_product->getName()); ?>,
+            "price": <?= json_encode($_product->getPrice()); ?>,
+            "formFields": <?= json_encode($_product->getData('printess_form_fields')); ?>
+        };
+        const shopSettings = <?= json_encode($editorSettings);  ?>;
+        product.variants = <?= json_encode($productVariations);  ?>;
+
+        const printessEditor = new PrintessMagentoIntegration(
+            {
+                shopToken: shopSettings.shopToken,
+                editorUrl: shopSettings.editorUrl,
+                editorVersion: shopSettings.editorVersion,
+                startupLogoUrl: shopSettings.customLogoUrl,
+                showStartupAnimation: shopSettings.showStartupAnimation,
+                hidePricesInEditor: hidePriceInEditor === true,
+                priceFormat: <?= json_encode($priceFormat) ?>
+            },
+            product
+        );
+
+        printessEditor.show({
+            templateName: template,
+            legalText: legalText,
+            legalTextUrl: ""
+        });
+    }
+</script>

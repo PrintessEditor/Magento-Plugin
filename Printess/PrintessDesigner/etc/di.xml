@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Sales\Block\Adminhtml\Order\View\Items">
+        <plugin name="printess_admin_order_columns" type="Printess\PrintessDesigner\Plugin\Adminhtml\OrderColumnsHead" sortOrder="1" />
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\View\Items\Renderer\DefaultRenderer">
+        <plugin name="printess_admin_order_columns_renderer" type="Printess\PrintessDesigner\Plugin\Adminhtml\OrderColumnsBody" sortOrder="1" />
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Items\Column\DefaultColumn">
+        <plugin name="printess_admin_order_options" type="Printess\PrintessDesigner\Plugin\Adminhtml\OrderOptions" sortOrder="1" />
+    </type>
+    <type name="Magento\Catalog\Block\Product\View">
+        <plugin name="printess_catalog_product_render_quantity" type="Printess\PrintessDesigner\Plugin\Product\RenderQuantity" sortOrder="1"/>
+    </type>
+    <type name="Magento\Checkout\Block\Cart\Item\Renderer">
+        <plugin name="printess_cart_item_image" type="Printess\PrintessDesigner\Plugin\CheckoutCart\Image" sortOrder="1"/>
+    </type>
+    <type name="Magento\Checkout\Block\Cart\Item\Renderer">
+        <plugin name="printess_cart_item_option_list" type="Printess\PrintessDesigner\Plugin\CheckoutCart\OptionList" sortOrder="1"/>
+    </type>
+    <type name="Magento\Sales\Api\OrderItemRepositoryInterface">
+        <plugin name="printess_orders_customproductattributes" type="Printess\PrintessDesigner\Plugin\Orders\CustomProductAttributes" />
+    </type>
+    <type name="Magento\Sales\Block\Order\Email\Items\Order\DefaultOrder">
+        <plugin name="printess_email_order_defaultorder" type="Printess\PrintessDesigner\Plugin\Email\Order\DefaultOrder" sortOrder="1"/>
+    </type>
+    <type name="Magento\Checkout\Block\Cart\Item\Renderer">
+        <plugin name="product_image_checkout_cart" type="Printess\PrintessDesigner\Plugin\CheckoutCart\Image" sortOrder="1"/>
+    </type>
+    <type name="Magento\Sales\Model\Reorder\Reorder">
+        <plugin name="Printess_PrintessDesigner" type="Printess\PrintessDesigner\Plugin\Reorder" sortOrder="1"/>
+    </type>
+    <preference for="Printess\PrintessDesigner\Api\PrintessApiInterface" type="Printess\PrintessDesigner\Api\PrintessApi"/>
+</config>

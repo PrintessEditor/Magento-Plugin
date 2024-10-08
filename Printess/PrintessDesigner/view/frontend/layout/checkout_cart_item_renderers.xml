@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <!-- <css src="Printess_PrintessDesigner::css/printessEditor.css" rel="stylesheet" type="text/css" /> -->
+        <!-- <script src="Printess_PrintessDesigner/js/printessEditor" />
+        <script src="Printess_PrintessDesigner/js/printessMagento" /> -->
+
+         <!-- <link src="Printess_PrintessDesigner::js/printessEditor.js"/>
+         <link src="Printess_PrintessDesigner::js/printessMagento.js"/> -->
+    </head>
+    <body>
+        <!-- <referenceblock class="Magento\Bundle\Block\Checkout\Cart\Item\Renderer" name="checkout.cart.item.renderers.bundle" template="Printess_PrintessDesigner::cart/item/default.phtml" />
+        <referenceblock class="Magento\Checkout\Block\Cart\Item\Renderer" name="checkout.cart.item.renderers.virtual" template="Printess_PrintessDesigner::cart/item/default.phtml" />
+        <referenceblock class="Magento\Checkout\Block\Cart\Item\Renderer" name="checkout.cart.item.renderers.default" template="Printess_PrintessDesigner::cart/item/default.phtml" />
+        <referenceblock class="Magento\ConfigurableProduct\Block\Cart\Item\Renderer\Configurable" name="checkout.cart.item.renderers.configurable" template="Printess_PrintessDesigner::cart/item/default.phtml" />
+        <referenceblock class="Magento\Downloadable\Block\Checkout\Cart\Item\Renderer" name="checkout.cart.item.renderers.downloadable" template="Printess_PrintessDesigner::cart/item/default.phtml" />
+        <referenceblock class="Magento\GroupedProduct\Block\Cart\Item\Renderer\Grouped" name="checkout.cart.item.renderers.grouped" template="Printess_PrintessDesigner::cart/item/default.phtml" /> -->
+
+        <referenceBlock name="checkout.cart.item.renderers.default.actions">
+            <block class="Printess\PrintessDesigner\Block\EditButton" name="checkout.cart.item.renderers.default.actions.printess_edit" template="Printess_PrintessDesigner::cart/item/renderer/actions/edit.phtml" before="checkout.cart.item.renderers.default.actions.edit"/>
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.item.renderers.simple.actions">
+            <block class="Printess\PrintessDesigner\Block\EditButton" name="checkout.cart.item.renderers.simple.actions.printess_edit" template="Printess_PrintessDesigner::cart/item/renderer/actions/edit.phtml" before="checkout.cart.item.renderers.simple.actions.edit"/>
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.item.renderers.bundle.actions">
+            <block class="Printess\PrintessDesigner\Block\EditButton" name="checkout.cart.item.renderers.bundle.actions.printess_edit" template="Printess_PrintessDesigner::cart/item/renderer/actions/edit.phtml" before="checkout.cart.item.renderers.bundle.actions.edit"/>
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.item.renderers.downloadable.actions">
+            <block class="Printess\PrintessDesigner\Block\EditButton" name="checkout.cart.item.renderers.downloadable.actions.printess_edit" template="Printess_PrintessDesigner::cart/item/renderer/actions/edit.phtml" before="checkout.cart.item.renderers.downloadable.actions.edit"/>
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.item.renderers.grouped.actions">
+            <block class="Printess\PrintessDesigner\Block\EditButton" name="checkout.cart.item.renderers.grouped.actions.printess_edit" template="Printess_PrintessDesigner::cart/item/renderer/actions/edit.phtml" before="checkout.cart.item.renderers.grouped.actions.edit"/>
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.item.renderers.configurable.actions">
+            <block class="Printess\PrintessDesigner\Block\EditButton" name="checkout.cart.item.renderers.configurable.actions.printess_edit" template="Printess_PrintessDesigner::cart/item/renderer/actions/edit.phtml" before="checkout.cart.item.renderers.configurable.actions.edit"/>
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.item.renderers.virtual.actions">
+            <block class="Printess\PrintessDesigner\Block\EditButton" name="checkout.cart.item.renderers.virtual.actions.printess_edit" template="Printess_PrintessDesigner::cart/item/renderer/actions/edit.phtml" before="checkout.cart.item.renderers.virtual.actions.edit"/>
+        </referenceBlock>
+    </body>
+</page>

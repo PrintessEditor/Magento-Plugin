@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="script-src">
+            <values>
+                <value id="printess.editor" type="host">https://editor.printess.com</value>
+            </values>
+        </policy>
+        <policy id="style-src">
+            <values>
+                <value id="printess.editor" type="host">https://editor.printess.com</value>
+            </values>
+        </policy>
+        <policy id="img-src">
+            <values>
+                <value id="printess.resource" type="host">https://resource.printess.com</value>
+                <value id="printess.s3" type="host">https://printess-prod.s3.eu-central-1.amazonaws.com</value>
+            </values>
+        </policy>
+        <policy id="font-src">
+            <values>
+                <value id="printess.editor" type="host">https://editor.printess.com</value>
+                <value id="printess.resource" type="host">https://resource.printess.com</value>
+
+            </values>
+        </policy>
+        <policy id="connect-src">
+            <values>
+                <value id="printess.editor" type="host">https://editor.printess.com</value>
+                <value id="printess.api" type="host">https://api.printess.com</value>
+                <value id="printess.resource" type="host">https://resource.printess.com</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>
